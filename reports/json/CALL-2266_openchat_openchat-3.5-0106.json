@@ -1,0 +1,20 @@
+{
+  "call_id": "CALL-2266",
+  "customer_id": "CUST-20685",
+  "representative_id": "Agent_B",
+  "summary": "The customer needed to restart a medication called Escitalopram and required a prescription to be sent from their doctor. The representative said they would contact the doctor to send the fax and proceed with the new prescription once the doctor's office confirms. They also agreed to include a reminder sticker and to ship it to the correct address. The customer was asked if they wanted any additional assistance, but replied that everything they needed was included.",
+  "keywords": [
+    "Escitalopram",
+    "prescription",
+    "fax",
+    "reminder sticker",
+    "ship",
+    "address"
+  ],
+  "intent": "Medication_Change",
+  "sentiment_customer": "positive",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "positive",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

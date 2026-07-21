@@ -1,0 +1,19 @@
+{
+  "call_id": "CALL-9462",
+  "customer_id": "CUST-62314",
+  "representative_id": "Agent_C",
+  "summary": "The customer asked about the pharmacy hours and if they need an appointment for a flu shot. The representative informed them of the hours and that no appointment is needed. They also clarified that the flu shot is covered by insurance and offered information about COVID boosters. The customer confirmed that they can get both vaccines on the same day and the representative advised bringing ID and insurance card.",
+  "keywords": [
+    "pharmacy hours",
+    "flu shot",
+    "insurance",
+    "COVID boosters",
+    "vaccines"
+  ],
+  "intent": "Doctor_Contact",
+  "sentiment_customer": "positive",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "positive",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

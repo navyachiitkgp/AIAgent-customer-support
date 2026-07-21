@@ -1,0 +1,6 @@
+Speaker,Text,Start,End
+Customer,I was charged twice for the same prescription this week.,0.0,4.67
+Representative,Sorry to hear that. Looking at the history I do see a duplicate charge from Tuesday.,5.07,12.07
+Customer,Can you refund the second one?,12.47,14.97
+Representative,Yes — I've voided the duplicate and a refund should post in three to five business days.,15.37,22.7
+Customer,"Perfect, thank you.",23.1,25.6

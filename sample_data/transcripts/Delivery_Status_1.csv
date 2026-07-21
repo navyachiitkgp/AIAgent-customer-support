@@ -1,0 +1,7 @@
+Speaker,Text,Start,End
+Customer,My prescription was supposed to arrive yesterday but the tracking hasn't moved.,0.0,6.58
+Representative,I can check that. What's the tracking number ending in?,6.98,11.57
+Customer,It's a USPS package ending in 4482.,11.97,14.88
+Representative,Looks like the carrier marked it as delayed. I can put a tracer on it or we can reship overnight.,15.28,23.37
+Customer,"Please reship overnight, I need the medication.",23.77,27.68
+Representative,Done. You'll get a new tracking link by SMS within the hour.,28.08,33.08

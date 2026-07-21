@@ -1,0 +1,6 @@
+Speaker,Text,Start,End
+Customer,"Hi, this is Mary. I need a refill on my cholesterol meds and Metformin.",0.0,5.92
+Representative,"Hi Mary, welcome to Contoso Pharmacy. I see both are eligible for refill.",6.32,12.4
+Customer,Can you put them both through for pickup tomorrow?,12.8,16.97
+Representative,Yes — both will be ready after 2pm tomorrow. Anything else?,17.37,22.28
+Customer,"That's all, thank you!",22.68,25.18

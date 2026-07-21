@@ -1,0 +1,22 @@
+{
+  "call_id": "CALL-8606",
+  "customer_id": "CUST-86241",
+  "representative_id": "Agent_A",
+  "summary": "The customer was looking for over-the-counter medications for motion sickness, specifically a non-drowsy option that they could take before a flight. The representative recommended Bonine or non-drowsy Dramamine, both available in chewable form, which usually take effect within 30 to 60 minutes. They also offered to hold a pack of the product at the front desk for the customer's arrival. The customer also asked for travel-size hand sanitizer, which the store offered at the register.",
+  "keywords": [
+    "motion sickness",
+    "over-the-counter",
+    "non-drowsy",
+    "Bonine",
+    "Dramamine",
+    "chewable",
+    "30 to 60 minutes",
+    "travel-size hand sanitizer"
+  ],
+  "intent": "General_Inquiry",
+  "sentiment_customer": "positive",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "positive",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

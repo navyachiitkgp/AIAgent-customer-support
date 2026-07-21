@@ -1,0 +1,19 @@
+{
+  "call_id": "CALL-1815",
+  "customer_id": "CUST-64136",
+  "representative_id": "Agent_C",
+  "summary": "The customer is having unpleasant side effects from his current medication (Sertraline) and would like us to request a new prescription (Escitalopram). The customer requires medication delivery, a medication guide, and wishes to follow-up once Dr. Weller approves it.",
+  "keywords": [
+    "Sertraline",
+    "Escitalopram",
+    "medication delivery",
+    "medication guide",
+    "follow-up"
+  ],
+  "intent": "Medication_Change",
+  "sentiment_customer": "neutral",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "neutral",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

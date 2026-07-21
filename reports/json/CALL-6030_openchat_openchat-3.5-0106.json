@@ -1,0 +1,19 @@
+{
+  "call_id": "CALL-6030",
+  "customer_id": "CUST-11305",
+  "representative_id": "Agent_B",
+  "summary": "A customer was expecting a delivery of their prescription medication, but it didn't show up. The representative checked the tracking information and confirmed that the package was marked as delivered by USPS, but the customer couldn't find it anywhere. The representative filed a delivery inquiry with USPS and provided the tracking number. If the package doesn't show up by tomorrow, the representative will start a lost parcel process for reshipment. The representative also offered to arrange a same-day replacement if the customer's insurance allows it.",
+  "keywords": [
+    "delivery",
+    "tracking",
+    "USPS",
+    "prescription medication",
+    "lost parcel"
+  ],
+  "intent": "Delivery_Status",
+  "sentiment_customer": "neutral",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "neutral",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

@@ -1,0 +1,33 @@
+# Core
+pandas
+numpy
+matplotlib
+seaborn
+wordcloud
+streamlit
+requests
+python-dotenv
+tabulate
+scikit-learn
+duckdb
+
+# Audio / transcription
+pydub
+ffmpeg-python
+openai-whisper
+torch
+torchaudio
+pyannote.audio
+huggingface-hub
+
+# LLM + RAG
+openai
+langchain
+langchain-community
+langchain-openai
+faiss-cpu
+beautifulsoup4
+pdfplumber
+sentence-transformers
+gradio
+transformers

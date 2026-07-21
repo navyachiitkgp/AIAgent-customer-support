@@ -1,0 +1,19 @@
+{
+  "call_id": "CALL-7338",
+  "customer_id": "CUST-72383",
+  "representative_id": "Agent_C",
+  "summary": "The customer, Mary, called Contoso Pharmacy to request a refill of her prescribed medications for cholesterol. After checking her records, the representative discovered that her doctor had prescribed her a different drug, Metformin, since 2021. Mary was informed of the change and agreed to have the Metformin refilled for pickup.",
+  "keywords": [
+    "Mary",
+    "Contoso Pharmacy",
+    "refill",
+    "cholesterol",
+    "Metformin"
+  ],
+  "intent": "Refill_Request",
+  "sentiment_customer": "positive",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "positive",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

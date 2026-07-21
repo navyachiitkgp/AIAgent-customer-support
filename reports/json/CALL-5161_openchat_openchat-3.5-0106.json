@@ -1,0 +1,21 @@
+{
+  "call_id": "CALL-5161",
+  "customer_id": "CUST-11948",
+  "representative_id": "Agent_C",
+  "summary": "The customer was concerned about being overcharged for their medication. They were told that their insurance coverage changed, leading to an increased copay. The representative verified this with the customer and sent a request to the insurance provider. Additionally, the customer's bill was credited temporarily.",
+  "keywords": [
+    "overcharged",
+    "medication",
+    "insurance coverage",
+    "copay",
+    "representative",
+    "insurance provider",
+    "bill credited"
+  ],
+  "intent": "Billing_Issue",
+  "sentiment_customer": "neutral",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "neutral",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

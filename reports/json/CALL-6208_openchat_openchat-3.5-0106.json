@@ -1,0 +1,20 @@
+{
+  "call_id": "CALL-6208",
+  "customer_id": "CUST-82423",
+  "representative_id": "Agent_A",
+  "summary": "The customer contacted support to get a new prescription for Warfarin from Dr. Harris at Pinewood Clinic, as their previous supply ran out. The representative prepared a fax request to the doctor's office and informed the customer that they would receive updates via text. They agreed on picking up the prescription in person and the representative assured them they would be notified once the confirmation was received.",
+  "keywords": [
+    "Warfarin",
+    "prescription",
+    "Dr. Harris",
+    "Pinewood Clinic",
+    "fax request",
+    "text updates"
+  ],
+  "intent": "Refill_Request",
+  "sentiment_customer": "positive",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "positive",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

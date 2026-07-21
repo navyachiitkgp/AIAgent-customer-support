@@ -1,0 +1,40 @@
+# Virtual environments / secrets
+venv/
+.venv/
+.env
+.env.*
+!.env.example
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Notebooks / logs / temp
+.ipynb_checkpoints/
+*.log
+temp/
+tmp/
+
+# Model / runtime artifacts (regenerable, often huge)
+*.pt
+*.bin
+*.ckpt
+whisper_models/
+.cache/
+
+# Optional: keep faiss index in repo for demos; uncomment to ignore locally rebuilt indexes
+# smart_retrieval_bot/faiss_index/
+
+# Local audio dumps (sample_data/audio keeps .gitkeep + README only)
+sample_data/audio/*
+!sample_data/audio/.gitkeep
+!sample_data/audio/README.md

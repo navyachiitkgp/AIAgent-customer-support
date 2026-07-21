@@ -1,0 +1,9 @@
+Speaker,Text,Start,End
+Customer,"Hi, I got a bill for $112 for my Advair inhaler and I thought insurance covered it.",0.0,6.92
+Representative,I'm sorry about that. Let me pull up your account. Can I have your date of birth?,7.32,14.07
+Customer,"March 12, 1984. I always go to Contoso Pharmacy, so I'm confused why this happened.",14.47,21.38
+Representative,I see the claim was processed as out-of-network. Did you recently get a new insurance card?,21.78,29.37
+Customer,"Yes, actually, last month. I forgot to update you.",29.77,33.93
+Representative,"That explains it. Please upload a copy of the new card through our secure portal or fax it, and we'll reprocess the claim.",34.33,44.5
+Customer,"Okay, I'll send it tonight. Thanks for checking.",44.9,48.9
+Representative,You're welcome. Once we have the card on file we'll reverse the out-of-network charge.,49.3,56.47

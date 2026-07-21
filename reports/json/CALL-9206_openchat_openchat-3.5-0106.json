@@ -1,0 +1,19 @@
+{
+  "call_id": "CALL-9206",
+  "customer_id": "CUST-86926",
+  "representative_id": "Agent_B",
+  "summary": "The customer received a prescription for Metformin with a different dosage than usual and was not informed about the change. The representative checked the records and confirmed that the doctor recently updated the dosage to 1000mg. The customer requested to hold the future refills until they could confirm the new dosage with their doctor, which the representative agreed to.",
+  "keywords": [
+    "prescription",
+    "Metformin",
+    "dosage",
+    "update",
+    "future refills"
+  ],
+  "intent": "Medication_Change",
+  "sentiment_customer": "neutral",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "neutral",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

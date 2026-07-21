@@ -1,0 +1,19 @@
+{
+  "call_id": "CALL-5159",
+  "customer_id": "CUST-64401",
+  "representative_id": "Agent_D",
+  "summary": "A customer received a $112 bill for her Advair inhaler purchase, which she thought was covered by insurance. The representative reviewed her account and found that it was processed as out-of-network despite always going to Contoso Pharmacy. The customer confirmed receiving a new insurance card and was instructed to send a copy of the card via their secure portal or fax so that the claim could be reprocessed.",
+  "keywords": [
+    "Advair inhaler",
+    "insurance",
+    "Contoso Pharmacy",
+    "out-of-network",
+    "claim reprocessing"
+  ],
+  "intent": "Billing_Issue",
+  "sentiment_customer": "negative",
+  "sentiment_representative": "negative",
+  "sentiment_ending": "negative",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

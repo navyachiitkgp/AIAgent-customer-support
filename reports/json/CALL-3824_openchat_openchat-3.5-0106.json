@@ -1,0 +1,21 @@
+{
+  "call_id": "CALL-3824",
+  "customer_id": "CUST-71055",
+  "representative_id": "Agent_C",
+  "summary": "The customer, John Evans, wants to cancel his automatic refill for Atorvastatin 20mg due to switching doctors and changing his prescription to Rosuvastatin. The representative cancels the refill, updates John's profile, and offers to help transfer the new prescription to ABC Health Pharmacy. The representative assures John that he will be notified when the new prescription is ready.",
+  "keywords": [
+    "cancel",
+    "automatic refill",
+    "Atorvastatin",
+    "switching doctors",
+    "Rosuvastatin",
+    "prescription",
+    "ABC Health Pharmacy"
+  ],
+  "intent": "Medication_Change",
+  "sentiment_customer": "positive",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "positive",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

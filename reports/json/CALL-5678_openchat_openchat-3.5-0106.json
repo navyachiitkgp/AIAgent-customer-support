@@ -1,0 +1,19 @@
+{
+  "call_id": "CALL-5678",
+  "customer_id": "CUST-90322",
+  "representative_id": "Agent_A",
+  "summary": "The customer, James Norton, was charged twice for the same prescription. The representative, Sam, confirmed the issue and voided one of the charges. The refund will be processed back to the customer's card within 3-5 business days.",
+  "keywords": [
+    "charged",
+    "prescription",
+    "refund",
+    "voided",
+    "representative"
+  ],
+  "intent": "Billing_Issue",
+  "sentiment_customer": "positive",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "positive",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

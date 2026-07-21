@@ -1,0 +1,22 @@
+{
+  "call_id": "CALL-6127",
+  "customer_id": "CUST-54912",
+  "representative_id": "Agent_D",
+  "summary": "The customer wanted to switch their prescription from tablets to liquid for Levothyroxine as they are struggling to swallow pills. The support representative agreed to request the prescription change from their doctor, specify lactose intolerant, and to confirm insurance coverage.",
+  "keywords": [
+    "prescription",
+    "Levothyroxine",
+    "tablets",
+    "liquid",
+    "swallow",
+    "pills",
+    "doctor",
+    "insurance"
+  ],
+  "intent": "Medication_Change",
+  "sentiment_customer": "positive",
+  "sentiment_representative": "positive",
+  "sentiment_ending": "positive",
+  "model": "openchat/openchat-3.5-0106",
+  "timestamp": "2025-04-24T12:00:00"
+}

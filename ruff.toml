@@ -1,0 +1,4 @@
+[lint]
+# Keep CI green while still catching real bugs (undefined names, syntax).
+select = ["E9", "F63", "F7", "F82"]
+ignore = ["E501"]

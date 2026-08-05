@@ -7,8 +7,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/docker-compose-ready-blue.svg)](docker-compose.yml)
 
-> **Live demo:** run locally with Docker / Streamlit (below). Cloud host (HF Spaces / Render) is listed under [Future Work](#future-work).
-
 ---
 
 ## Demo
@@ -36,7 +34,7 @@
 
 ## Architecture
 
-Recruiters: start here. Full pipeline:
+End-to-end pipeline:
 
 ```mermaid
 flowchart TD
@@ -155,7 +153,7 @@ python scripts/run_eval.py             # full LLM eval (needs API key)
 
 Snapshot: [`eval_data/published_eval_report.json`](eval_data/published_eval_report.json).
 
-> Honest note: n=10 is a portfolio labeled set, not a large production benchmark.
+Eval set size is small (n=10); treat scores as a reproducible smoke benchmark, not a large-scale production study.
 
 ---
 

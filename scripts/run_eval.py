@@ -98,7 +98,7 @@ def main():
     }
     out = ROOT / "eval_data" / "last_eval_report.json"
     out.write_text(json.dumps(report, indent=2), encoding="utf-8")
-    # Stable artifact for README / resume (committed)
+    # Stable artifact for README (committed)
     if not args.offline:
         published = ROOT / "eval_data" / "published_eval_report.json"
         published.write_text(json.dumps(report, indent=2), encoding="utf-8")

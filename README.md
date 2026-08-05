@@ -3,9 +3,25 @@
 Pharmacy support-call intelligence: audio/transcripts → redacted summaries →
 SQLite analytics → coaching metrics → hybrid RAG (SQL + local embeddings).
 
+### 60-second demo
+
+![VoiceIQ demo](docs/voiceiq_demo.gif)
+
+[Download MP4 (~60s)](docs/voiceiq_demo.mp4) · Analyze → Dashboard → Ask VoiceIQ → Batch
+
+### Labeled eval (n=10, OpenRouter `gpt-4o-mini`)
+
+| Metric | Score |
+|--------|------:|
+| Intent accuracy | **100%** |
+| Sentiment accuracy | **80%** |
+| Summary keyword coverage | **90%** |
+
+Reproduce: `python scripts/run_eval.py` · snapshot in [`eval_data/published_eval_report.json`](eval_data/published_eval_report.json).
+
 ---
 
-## Quick demo (no audio stack)
+## Quick start
 
 ```bash
 python3 -m venv venv && source venv/bin/activate
@@ -15,7 +31,7 @@ bash scripts/demo.sh
 ./venv/bin/streamlit run app.py
 ```
 
-Open http://localhost:8501 — one app for **Analyze / Dashboard / Call detail / Ask / Batch**.
+Open http://localhost:8501 — **Analyze / Dashboard / Call detail / Ask / Batch**.
 
 API (optional):
 
@@ -27,7 +43,7 @@ uvicorn api.main:app --reload
 
 ---
 
-## What changed in v2
+## What you get
 
 | Area | Now |
 |------|-----|
@@ -70,9 +86,12 @@ python -m voiceiq.batch --watch  # folder watcher
 
 ## Evaluation
 
+Labeled set: 10 pharmacy-support calls across billing, delivery, refill, inquiry, and medication change.
+
 ```bash
 python scripts/run_eval.py --offline   # heuristic smoke
-python scripts/run_eval.py             # LLM judge vs labeled set
+python scripts/run_eval.py             # LLM vs labeled set (needs OPENROUTER_API_KEY)
+python scripts/make_demo_video.py      # regenerate docs/voiceiq_demo.{gif,mp4}
 ```
 
 ---

@@ -1,0 +1,98 @@
+{
+  "n": 10,
+  "intent_accuracy": 1.0,
+  "sentiment_accuracy": 0.8,
+  "summary_keyword_coverage": 0.9,
+  "mode": "llm",
+  "details": [
+    {
+      "call_id": "EVAL-001",
+      "intent_pred": "Billing_Issue",
+      "intent_ok": true,
+      "sentiment_pred": "neutral",
+      "sentiment_ok": false,
+      "summary_ok": true
+    },
+    {
+      "call_id": "EVAL-002",
+      "intent_pred": "Billing_Issue",
+      "intent_ok": true,
+      "sentiment_pred": "positive",
+      "sentiment_ok": true,
+      "summary_ok": true
+    },
+    {
+      "call_id": "EVAL-003",
+      "intent_pred": "Delivery_Status",
+      "intent_ok": true,
+      "sentiment_pred": "positive",
+      "sentiment_ok": false,
+      "summary_ok": false
+    },
+    {
+      "call_id": "EVAL-004",
+      "intent_pred": "Delivery_Status",
+      "intent_ok": true,
+      "sentiment_pred": "positive",
+      "sentiment_ok": true,
+      "summary_ok": true
+    },
+    {
+      "call_id": "EVAL-005",
+      "intent_pred": "Refill_Request",
+      "intent_ok": true,
+      "sentiment_pred": "positive",
+      "sentiment_ok": true,
+      "summary_ok": true
+    },
+    {
+      "call_id": "EVAL-006",
+      "intent_pred": "Refill_Request",
+      "intent_ok": true,
+      "sentiment_pred": "positive",
+      "sentiment_ok": true,
+      "summary_ok": true
+    },
+    {
+      "call_id": "EVAL-007",
+      "intent_pred": "General_Inquiry",
+      "intent_ok": true,
+      "sentiment_pred": "positive",
+      "sentiment_ok": true,
+      "summary_ok": true
+    },
+    {
+      "call_id": "EVAL-008",
+      "intent_pred": "General_Inquiry",
+      "intent_ok": true,
+      "sentiment_pred": "positive",
+      "sentiment_ok": true,
+      "summary_ok": true
+    },
+    {
+      "call_id": "EVAL-009",
+      "intent_pred": "Medication_Change",
+      "intent_ok": true,
+      "sentiment_pred": "positive",
+      "sentiment_ok": true,
+      "summary_ok": true
+    },
+    {
+      "call_id": "EVAL-010",
+      "intent_pred": "Medication_Change",
+      "intent_ok": true,
+      "sentiment_pred": "positive",
+      "sentiment_ok": true,
+      "summary_ok": true
+    }
+  ],
+  "allowed_intents": [
+    "Billing_Issue",
+    "Delivery_Status",
+    "Doctor_Contact",
+    "General_Inquiry",
+    "Medication_Change",
+    "Refill_Request",
+    "Side_Effect"
+  ]
+}

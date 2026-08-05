@@ -98,6 +98,11 @@ def main():
     }
     out = ROOT / "eval_data" / "last_eval_report.json"
     out.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    # Stable artifact for README / resume (committed)
+    if not args.offline:
+        published = ROOT / "eval_data" / "published_eval_report.json"
+        published.write_text(json.dumps(report, indent=2), encoding="utf-8")
+        print(f"Wrote {published}")
     print(json.dumps({k: report[k] for k in report if k != "details"}, indent=2))
     print(f"Wrote {out}")
 

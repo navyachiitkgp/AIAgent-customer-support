@@ -82,7 +82,11 @@ class OpenRouterClient:
 
     def sentiment(self, summary: str, speaker: str) -> str:
         prompt = (
-            f"Classify the sentiment of the {speaker}. "
+            f"Classify the overall {speaker} sentiment for this support call summary.\n"
+            "Use the customer's emotional tone about the issue and outcome.\n"
+            "- negative: frustrated, upset, worried, confused about a problem\n"
+            "- positive: thankful, relieved, satisfied with the outcome\n"
+            "- neutral: matter-of-fact, no clear emotion\n"
             "Reply with exactly one word: positive, neutral, or negative.\n\n"
             f"Summary:\n{summary}"
         )

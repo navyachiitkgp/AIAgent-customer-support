@@ -8,30 +8,65 @@
   },
   {
     "call_id": "EVAL-002",
-    "transcript_file": "Delivery_Status_1.csv",
-    "expected_intent": "Delivery_Status",
-    "expected_sentiment_customer": "neutral",
-    "summary_must_include": ["delivery", "tracking"]
+    "transcript_file": "Billing_Issue_2.csv",
+    "expected_intent": "Billing_Issue",
+    "expected_sentiment_customer": "positive",
+    "summary_must_include": ["refund", "charge"]
   },
   {
     "call_id": "EVAL-003",
+    "transcript_file": "Delivery_Status_1.csv",
+    "expected_intent": "Delivery_Status",
+    "expected_sentiment_customer": "neutral",
+    "summary_must_include": ["delivery"]
+  },
+  {
+    "call_id": "EVAL-004",
+    "transcript_file": "Delivery_Status_2.csv",
+    "expected_intent": "Delivery_Status",
+    "expected_sentiment_customer": "positive",
+    "summary_must_include": ["pickup"]
+  },
+  {
+    "call_id": "EVAL-005",
     "transcript_file": "Refill_Request_1.csv",
     "expected_intent": "Refill_Request",
     "expected_sentiment_customer": "positive",
     "summary_must_include": ["refill"]
   },
   {
-    "call_id": "EVAL-004",
+    "call_id": "EVAL-006",
+    "transcript_file": "Doctor_Contact_1.csv",
+    "expected_intent": "Refill_Request",
+    "expected_sentiment_customer": "positive",
+    "summary_must_include": ["refill"]
+  },
+  {
+    "call_id": "EVAL-007",
     "transcript_file": "General_Inquiry_1.csv",
     "expected_intent": "General_Inquiry",
     "expected_sentiment_customer": "positive",
     "summary_must_include": ["motion"]
   },
   {
-    "call_id": "EVAL-005",
+    "call_id": "EVAL-008",
+    "transcript_file": "General_Inquiry_2.csv",
+    "expected_intent": "General_Inquiry",
+    "expected_sentiment_customer": "positive",
+    "summary_must_include": ["hours"]
+  },
+  {
+    "call_id": "EVAL-009",
     "transcript_file": "Medication_Change_1.csv",
     "expected_intent": "Medication_Change",
     "expected_sentiment_customer": "positive",
     "summary_must_include": ["prescription"]
+  },
+  {
+    "call_id": "EVAL-010",
+    "transcript_file": "Medication_Change_2.csv",
+    "expected_intent": "Medication_Change",
+    "expected_sentiment_customer": "positive",
+    "summary_must_include": ["liquid"]
   }
 ]

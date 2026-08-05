@@ -3,7 +3,7 @@ Audio → diarized transcript pipeline.
 
 Uses OpenAI Whisper for speech-to-text and (optionally) pyannote.audio
 for speaker diarization. Output is a CSV with columns: Speaker, Text, Start, End
-which feeds directly into individual_call_transform.py / the CLI summarizer.
+which feeds into `voiceiq.pipeline` / the Streamlit Analyze tab.
 
 If pyannote isn't available (or HUGGINGFACE_TOKEN is missing), we fall back to
 a simple Whisper-only transcript labeled as alternating speakers — good enough

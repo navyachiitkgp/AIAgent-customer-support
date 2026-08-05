@@ -31,8 +31,9 @@ tmp/
 whisper_models/
 .cache/
 
-# Optional: keep faiss index in repo for demos; uncomment to ignore locally rebuilt indexes
-# smart_retrieval_bot/faiss_index/
+# Generated HTML call reports (pipeline writes here)
+reports/html/*
+!reports/html/.gitkeep
 
 # Local audio dumps (keep sample wav + docs)
 sample_data/audio/*

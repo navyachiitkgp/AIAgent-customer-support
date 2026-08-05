@@ -117,10 +117,3 @@ docker compose up --build
 ```
 
 Streamlit `:8501`, API `:8000`.
-
----
-
-## Legacy scripts
-
-Older CLIs still work (`class_call-individual_call_transform.py`, `streamlit_dashboard.py`,
-`smart_retrieval_bot/`). Prefer **`app.py`** for demos and day-to-day use.

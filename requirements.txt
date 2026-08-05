@@ -1,8 +1,2 @@
-# Convenience meta-file (core + audio)
+# Convenience meta-file (core + audio stack)
 -r requirements-audio.txt
-wordcloud
-tabulate
-duckdb
-pdfplumber
-gradio
-transformers

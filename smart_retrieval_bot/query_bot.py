@@ -1,51 +1,46 @@
 """
-VoiceIQ Agentic RAG bot — ask natural-language questions over call reports.
+VoiceIQ RAG bot — ask natural-language questions over call reports.
+
+Local embeddings + OpenRouter chat (no OpenAI billing required).
 
 Run from smart_retrieval_bot/:
-  streamlit run query_bot.py
+  ../venv/bin/streamlit run query_bot.py
 """
 
 import os
 import time
-from pathlib import Path
 
 import streamlit as st
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
-from langchain.agents import AgentExecutor, AgentType, Tool, initialize_agent
-from langchain.memory import ConversationBufferMemory
-from langchain.schema import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_openai import ChatOpenAI
+
+from rag_config import (
+    FAISS_INDEX_DIR,
+    OPENROUTER_API_KEY,
+    get_chat_llm,
+    get_embeddings,
+    make_documents,
+)
 
 try:
     import pdfplumber
-except ImportError:  # optional upload support
+except ImportError:
     pdfplumber = None
 
-load_dotenv(Path(__file__).resolve().parents[1] / ".env")
-load_dotenv()
-
-FAISS_INDEX_DIR = os.getenv("FAISS_INDEX_DIR", "faiss_index")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
-
-st.set_page_config(page_title="VoiceIQ Agentic RAG Bot", page_icon="🤖")
+st.set_page_config(page_title="VoiceIQ RAG Bot", page_icon="🤖", layout="centered")
 st.markdown(
-    "<h1 style='text-align: center;'>VoiceIQ Agentic RAG Bot</h1>",
+    "<h1 style='text-align: center;'>VoiceIQ RAG Bot</h1>",
     unsafe_allow_html=True,
 )
 st.markdown(
     "<p style='text-align: center; color: gray;'>"
-    "Ask questions about customer care call reports"
+    "Ask questions about the indexed call reports — no upload needed."
     "</p>",
     unsafe_allow_html=True,
 )
-st.divider()
 
-if not OPENAI_API_KEY:
-    st.error("Set `OPENAI_API_KEY` in your `.env` file to use the RAG bot.")
+if not OPENROUTER_API_KEY or "your-key-here" in OPENROUTER_API_KEY:
+    st.error("Set `OPENROUTER_API_KEY` in your project-root `.env` file.")
     st.stop()
 
 if not os.path.isdir(FAISS_INDEX_DIR):
@@ -55,17 +50,35 @@ if not os.path.isdir(FAISS_INDEX_DIR):
     )
     st.stop()
 
-embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-vectorstore = FAISS.load_local(
-    FAISS_INDEX_DIR, embeddings, allow_dangerous_deserialization=True
-)
-retriever = vectorstore.as_retriever(search_kwargs={"k": 10})
-llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0)
 
-if "memory" not in st.session_state:
-    st.session_state.memory = ConversationBufferMemory(
-        memory_key="chat_history", return_messages=True
+@st.cache_resource
+def load_stack():
+    embeddings = get_embeddings()
+    vectorstore = FAISS.load_local(
+        FAISS_INDEX_DIR, embeddings, allow_dangerous_deserialization=True
     )
+    llm = get_chat_llm(temperature=0)
+    return vectorstore, llm
+
+
+with st.spinner("Loading search index..."):
+    vectorstore, llm = load_stack()
+
+retriever = vectorstore.as_retriever(search_kwargs={"k": 6})
+
+st.success("Index ready — try a sample question below, or type your own.")
+
+sample_questions = [
+    "What billing issues came up in the calls?",
+    "Summarize delivery-related calls",
+    "Which agents handled insurance or claim problems?",
+]
+
+cols = st.columns(len(sample_questions))
+for col, q in zip(cols, sample_questions):
+    if col.button(q, use_container_width=True):
+        st.session_state["pending_prompt"] = q
+
 if "chat_messages" not in st.session_state:
     st.session_state.chat_messages = []
 
@@ -73,49 +86,40 @@ for msg in st.session_state.chat_messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-
-def search_documents(query: str) -> str:
-    docs = retriever.invoke(query)
-    return (
-        "\n\n".join(doc.page_content for doc in docs)
-        if docs
-        else "No relevant context found."
-    )
-
-
-tool = Tool(
-    name="SearchReports",
-    func=search_documents,
-    description="Search and analyze customer care call reports.",
+prompt = st.session_state.pop("pending_prompt", None) or st.chat_input(
+    "Ask about billing, delivery, agents, sentiment..."
 )
-
-base_agent = initialize_agent(
-    tools=[tool],
-    llm=llm,
-    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    memory=st.session_state.memory,
-    verbose=True,
-    handle_parsing_errors=True,
-)
-
-agent_executor = AgentExecutor.from_agent_and_tools(
-    agent=base_agent.agent,
-    tools=[tool],
-    memory=st.session_state.memory,
-    verbose=True,
-    handle_parsing_errors=True,
-)
-
-prompt = st.chat_input("Ask VoiceIQ something about your reports...")
 
 if prompt:
     with st.chat_message("user"):
         st.markdown(prompt)
     st.session_state.chat_messages.append({"role": "user", "content": prompt})
 
-    result = agent_executor.invoke({"input": prompt})
-    final_output = result["output"]
-    steps = result.get("intermediate_steps", [])
+    docs = retriever.invoke(prompt)
+    context = (
+        "\n\n".join(doc.page_content for doc in docs)
+        if docs
+        else "No relevant context found."
+    )
+    history = "\n".join(
+        f"{m['role']}: {m['content']}" for m in st.session_state.chat_messages[-6:]
+    )
+    full_prompt = f"""You are VoiceIQ, a helpful assistant for pharmacy customer-care call reports.
+Answer using ONLY the relevant reports below. If unsure, say you don't know.
+Cite call IDs when possible.
+
+Chat history:
+{history}
+
+Relevant reports:
+\"\"\"
+{context}
+\"\"\"
+
+User: {prompt}
+Assistant:"""
+
+    final_output = llm.invoke(full_prompt).content
 
     with st.chat_message("assistant"):
         animated = st.empty()
@@ -123,32 +127,31 @@ if prompt:
         for char in final_output:
             shown += char
             animated.markdown(shown + "▌")
-            time.sleep(0.012)
+            time.sleep(0.008)
         animated.markdown(shown)
 
-    docs = retriever.invoke(prompt)
     if docs:
-        with st.expander("Retrieved document metadata", expanded=False):
+        with st.expander("Sources used", expanded=False):
             for i, doc in enumerate(docs[:3]):
-                st.markdown(f"**Chunk {i + 1}**")
-                for key, value in doc.metadata.items():
-                    st.markdown(f"- **{key}**: `{value}`")
-                st.markdown("---")
+                meta = doc.metadata or {}
+                st.markdown(
+                    f"**{i + 1}. {meta.get('call_id', 'Unknown')}** "
+                    f"({meta.get('source', 'n/a')})"
+                )
+                st.caption(doc.page_content[:220] + "...")
 
-    if steps:
-        with st.expander("Agent reasoning", expanded=False):
-            for i, step in enumerate(steps):
-                st.markdown(f"**Step {i + 1}**")
-                st.markdown(f"Thought: {step[0].log.strip()}")
-                st.markdown(f"Observation: {step[1]}")
-                st.markdown("---")
-
-    st.session_state.memory.chat_memory.add_user_message(prompt)
-    st.session_state.memory.chat_memory.add_ai_message(final_output)
     st.session_state.chat_messages.append({"role": "assistant", "content": final_output})
 
-with st.expander("Upload report (HTML or PDF)", expanded=False):
-    uploaded = st.file_uploader(" ", label_visibility="collapsed", type=["html", "pdf"])
+with st.expander("Optional: add another report to the index", expanded=False):
+    st.caption(
+        "Reports are already loaded from `smart_retrieval_bot/reports/`. "
+        "Use this only if you want to add a new HTML/PDF."
+    )
+    uploaded = st.file_uploader(
+        "Extra report (optional)",
+        type=["html", "pdf"],
+        label_visibility="visible",
+    )
 
     def extract_text(file) -> str:
         if file.name.endswith(".html"):
@@ -160,9 +163,7 @@ with st.expander("Upload report (HTML or PDF)", expanded=False):
                 st.error("Install pdfplumber to upload PDFs.")
                 return ""
             with pdfplumber.open(file) as pdf:
-                return "\n".join(
-                    page.extract_text() or "" for page in pdf.pages
-                )
+                return "\n".join(page.extract_text() or "" for page in pdf.pages)
         return ""
 
     if uploaded:
@@ -170,10 +171,6 @@ with st.expander("Upload report (HTML or PDF)", expanded=False):
         if not raw.strip():
             st.error("No readable text found in the uploaded file.")
         else:
-            splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-            docs = [
-                Document(page_content=chunk, metadata={"source": uploaded.name})
-                for chunk in splitter.split_text(raw)
-            ]
+            docs = make_documents(raw, {"source": uploaded.name})
             vectorstore.add_documents(docs)
             st.success(f"Indexed {len(docs)} chunks from **{uploaded.name}**")

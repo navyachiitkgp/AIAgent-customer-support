@@ -1,36 +1,27 @@
 """Conversational RAG with optional representative filter."""
 
-import os
+import sys
 from pathlib import Path
 
 import streamlit as st
-from dotenv import load_dotenv
-from langchain.memory import ConversationBufferMemory
-from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_openai import ChatOpenAI
 
-HERE = Path(__file__).resolve().parent
-BOT_ROOT = HERE.parent
-load_dotenv(BOT_ROOT.parent / ".env")
-load_dotenv()
-
-FAISS_INDEX_DIR = os.getenv("FAISS_INDEX_DIR", str(BOT_ROOT / "faiss_index"))
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from rag_config import FAISS_INDEX_DIR, OPENROUTER_API_KEY, get_chat_llm, get_embeddings
 
 st.set_page_config(page_title="Conversational RAG Assistant", page_icon="🤖")
 st.title("Conversational Call Report Assistant")
 
-if not OPENAI_API_KEY:
-    st.error("Set OPENAI_API_KEY in .env")
+if not OPENROUTER_API_KEY or "your-key-here" in OPENROUTER_API_KEY:
+    st.error("Set OPENROUTER_API_KEY in .env")
     st.stop()
 
-embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+embeddings = get_embeddings()
 vectorstore = FAISS.load_local(
     FAISS_INDEX_DIR, embeddings, allow_dangerous_deserialization=True
 )
 retriever = vectorstore.as_retriever()
-llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0)
+llm = get_chat_llm(temperature=0)
 
 
 def collect_rep_ids():
@@ -54,20 +45,12 @@ rep_id = st.selectbox("Filter by Representative", ["All"] + available_rep_ids)
 rep_id_filter = None if rep_id == "All" else rep_id
 user_input = st.text_input("Ask a question (supports follow-ups):")
 
-if "memory" not in st.session_state:
-    st.session_state.memory = ConversationBufferMemory(
-        memory_key="chat_history", return_messages=True
-    )
 if "chat" not in st.session_state:
     st.session_state.chat = []
 
 if user_input:
     context = search_documents(user_input, rep_id_filter)
-    memory = st.session_state.memory
-    chat_history = "\n".join(
-        f"{'User' if msg.type == 'human' else 'Assistant'}: {msg.content}"
-        for msg in memory.chat_memory.messages
-    )
+    chat_history = "\n".join(f"{role}: {msg}" for role, msg in st.session_state.chat[-6:])
     prompt = f"""
 You are a helpful assistant analyzing customer care call reports.
 
@@ -83,8 +66,6 @@ Now answer this:
 {user_input}
 """
     response = llm.invoke(prompt).content
-    memory.chat_memory.add_user_message(user_input)
-    memory.chat_memory.add_ai_message(response)
     st.session_state.chat.append(("You", user_input))
     st.session_state.chat.append(("Assistant", response))
 

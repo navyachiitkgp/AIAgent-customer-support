@@ -34,7 +34,27 @@ whisper_models/
 # Optional: keep faiss index in repo for demos; uncomment to ignore locally rebuilt indexes
 # smart_retrieval_bot/faiss_index/
 
-# Local audio dumps (sample_data/audio keeps .gitkeep + README only)
+# Local audio dumps (keep sample wav + docs)
 sample_data/audio/*
 !sample_data/audio/.gitkeep
 !sample_data/audio/README.md
+!sample_data/audio/Billing_Issue_sample.wav
+
+# Runtime DB / indexes / inbox
+data/voiceiq.db
+data/*.db
+data/faiss_index/*
+!data/faiss_index/.gitkeep
+data/inbox/*
+!data/inbox/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+eval_data/last_eval_report.json
+
+# Streamlit / pytest caches
+.streamlit/secrets.toml
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+

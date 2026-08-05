@@ -1,0 +1,5 @@
+Speaker,Text,Start,End
+Customer,"Hi, I got a bill for $112 for my Advarian Haler and I thought insurance covered it.",0.0,6.08
+Representative,"I am sorry about that, let me pull up your account, did you recently get a new insurance card?",6.08,12.08
+Customer,"Yes, last month, I forgot to update you.",12.08,15.68
+Representative,Please upload a copy of the new card through our secure portal and we will reprocess the claim.,15.68,21.04

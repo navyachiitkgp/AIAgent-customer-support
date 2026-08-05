@@ -32,10 +32,59 @@ def load_whisper(model_size: str = "base"):
     return whisper.load_model(model_size)
 
 
+def load_audio_array(audio_path: str):
+    """
+    Load audio as float32 mono @ 16kHz for Whisper.
+    Prefers ffmpeg (via whisper.load_audio). Falls back to stdlib wave for .wav
+    so demos still work when ffmpeg isn't installed.
+    """
+    import numpy as np
+    import whisper
+
+    try:
+        return whisper.load_audio(audio_path)
+    except FileNotFoundError as exc:
+        # Usually means ffmpeg binary is missing
+        if Path(audio_path).suffix.lower() != ".wav":
+            raise RuntimeError(
+                "ffmpeg is required for non-WAV audio. Install it with: brew install ffmpeg"
+            ) from exc
+
+    import wave
+
+    with wave.open(audio_path, "rb") as wf:
+        n_channels = wf.getnchannels()
+        sample_rate = wf.getframerate()
+        sampwidth = wf.getsampwidth()
+        raw = wf.readframes(wf.getnframes())
+
+    if sampwidth == 2:
+        audio = np.frombuffer(raw, dtype=np.int16).astype(np.float32) / 32768.0
+    elif sampwidth == 4:
+        audio = np.frombuffer(raw, dtype=np.int32).astype(np.float32) / 2147483648.0
+    else:
+        raise RuntimeError(f"Unsupported WAV sample width: {sampwidth}")
+
+    if n_channels > 1:
+        audio = audio.reshape(-1, n_channels).mean(axis=1)
+
+    target_sr = 16000
+    if sample_rate != target_sr:
+        # lightweight linear resample (good enough for demo WAVs)
+        duration = len(audio) / float(sample_rate)
+        target_len = int(duration * target_sr)
+        x_old = np.linspace(0.0, 1.0, num=len(audio), endpoint=False)
+        x_new = np.linspace(0.0, 1.0, num=target_len, endpoint=False)
+        audio = np.interp(x_new, x_old, audio).astype(np.float32)
+
+    return audio
+
+
 def transcribe_with_whisper(model, audio_path: str):
     """Return whisper result dict (segments with start/end/text)."""
+    audio = load_audio_array(audio_path)
     # fp16=False keeps things stable on CPU / Mac
-    return model.transcribe(audio_path, fp16=False, verbose=False)
+    return model.transcribe(audio, fp16=False, verbose=False)
 
 
 def diarize_with_pyannote(audio_path: str, hf_token: str):

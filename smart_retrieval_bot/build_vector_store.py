@@ -1,7 +1,7 @@
 """
 Build a FAISS vector index from HTML call reports under ./reports/.
 
-Requires OPENAI_API_KEY in the environment (or .env).
+Uses local sentence-transformers embeddings (no OpenAI credits).
 Run from the smart_retrieval_bot/ directory:
 
   cd smart_retrieval_bot
@@ -10,24 +10,11 @@ Run from the smart_retrieval_bot/ directory:
 
 import os
 import re
-from pathlib import Path
 
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
-from langchain.schema import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
-load_dotenv(Path(__file__).resolve().parents[1] / ".env")
-load_dotenv()
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
-REPORTS_DIR = os.getenv("REPORTS_DIR", "reports")
-FAISS_INDEX_DIR = os.getenv("FAISS_INDEX_DIR", "faiss_index")
-
-if not OPENAI_API_KEY:
-    raise SystemExit("Set OPENAI_API_KEY in .env before building the vector store.")
+from rag_config import FAISS_INDEX_DIR, REPORTS_DIR, get_embeddings, make_documents
 
 
 def extract_metadata(text: str):
@@ -59,20 +46,17 @@ def main():
             full_text = soup.get_text(separator=" ", strip=True)
 
         metadata = extract_metadata(full_text)
-        splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-        for i, chunk in enumerate(splitter.split_text(full_text)):
-            all_documents.append(
-                Document(
-                    page_content=chunk,
-                    metadata={**metadata, "source": fname, "chunk": i},
-                )
-            )
+        docs = make_documents(full_text, {**metadata, "source": fname})
+        all_documents.extend(docs)
 
     if not all_documents:
         raise SystemExit(f"No HTML reports found in {REPORTS_DIR}")
 
-    print(f"Prepared {len(all_documents)} chunks. Embedding with OpenAI...")
-    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+    print(
+        f"Prepared {len(all_documents)} chunks. "
+        "Embedding locally (sentence-transformers)..."
+    )
+    embeddings = get_embeddings()
     db = FAISS.from_documents(all_documents, embeddings)
     db.save_local(FAISS_INDEX_DIR)
     print(f"FAISS index saved to {FAISS_INDEX_DIR}")

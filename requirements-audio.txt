@@ -1,0 +1,9 @@
+# Heavy audio stack — install only if you need Whisper / pyannote
+-r requirements-core.txt
+pydub
+ffmpeg-python
+openai-whisper
+torch
+torchaudio
+pyannote.audio
+huggingface-hub

@@ -1,0 +1,19 @@
+{
+  "call_id": "CALL-TEST-001",
+  "customer_id": "CUST-91150",
+  "representative_id": "Agent_D",
+  "summary": "The customer was confused about a $112 bill for their Advair inhaler, believing it should be covered by insurance. The representative explained that the claim was processed as out-of-network due to the customer's recent change in insurance and instructed them to upload or fax a copy of the new insurance card to reprocess the claim and reverse the charge.",
+  "keywords": [
+    "customer",
+    "bill",
+    "insurance",
+    "claim",
+    "inhaler"
+  ],
+  "intent": "Billing_Issue",
+  "sentiment_customer": "neutral",
+  "sentiment_representative": "neutral",
+  "sentiment_ending": "positive",
+  "model": "openai/gpt-4o-mini",
+  "timestamp": "2026-08-05T18:45:16.220377"
+}

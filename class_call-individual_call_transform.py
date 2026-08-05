@@ -33,8 +33,8 @@ parser.add_argument(
 )
 parser.add_argument(
     "--model",
-    default="openchat/openchat-3.5-0106",
-    help="OpenRouter model id.",
+    default="openai/gpt-4o-mini",
+    help="OpenRouter model id (openchat/openchat-3.5-0106 is retired).",
 )
 args = parser.parse_args()
 

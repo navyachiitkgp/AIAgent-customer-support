@@ -1,0 +1,22 @@
+# Dashboard, API, SQLite, RAG chat (no torch/whisper)
+pandas
+numpy
+matplotlib
+seaborn
+streamlit
+requests
+python-dotenv
+scikit-learn
+fastapi
+uvicorn
+python-multipart
+pydantic
+openai
+langchain
+langchain-community
+langchain-openai
+langchain-core
+faiss-cpu
+beautifulsoup4
+sentence-transformers==2.7.0
+pytest

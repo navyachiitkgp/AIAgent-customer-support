@@ -1,0 +1,19 @@
+{
+  "call_id": "CALL-TEST-002",
+  "customer_id": "CUST-70819",
+  "representative_id": "Agent_D",
+  "summary": "Here is a summary of the conversation in 2-3 meaningful sentences:\n\nThe customer was surprised to receive a $112 bill for their Advair inhaler, expecting insurance coverage. The representative explained that the claim was processed as out-of-network due to a lack of updated insurance information. The customer will send their new insurance card to the representative, who will then reprocess the claim and reverse the out-of-network charge.",
+  "keywords": [
+    "Insurance",
+    "Claim",
+    "Reprocess",
+    "Network",
+    "Coverage"
+  ],
+  "intent": "General_Inquiry",
+  "sentiment_customer": "neutral",
+  "sentiment_representative": "neutral",
+  "sentiment_ending": "neutral",
+  "model": "meta-llama/llama-3.1-8b-instruct",
+  "timestamp": "2026-08-05T18:45:53.623109"
+}

@@ -19,7 +19,7 @@ import seaborn as sns
 
 
 class OpenRouterTranscriptSummarizer:
-    def __init__(self, api_key: str, model: str = "openchat/openchat-3.5-0106"):
+    def __init__(self, api_key: str, model: str = "openai/gpt-4o-mini"):
         self.api_key = api_key
         self.api_url = "https://openrouter.ai/api/v1/chat/completions"
         self.headers = {
